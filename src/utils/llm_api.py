@@ -7,7 +7,12 @@ from openai import AzureOpenAI
 from openai import OpenAI
 from termcolor import colored
 import openai
-from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+
+try:
+    from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+except ImportError:
+    DefaultAzureCredential = None
+    get_bearer_token_provider = None
 
 
 
@@ -18,6 +23,7 @@ class LLM:
         self.count = 0
         self.error_count = 0
         self.context_length = 4000
+        self._is_local_vllm = False
 
         # Load the configuration from the YAML file
         with open(config_file, "r") as f:
@@ -28,10 +34,22 @@ class LLM:
         else:
             self.key_dict = {}
 
-        if self.model_name in config:
+        # ── Local vLLM / Nemotron support ──────────────────────────
+        vllm_base_url = os.getenv("VLLM_BASE_URL", "http://localhost:8002/v1")
+        vllm_api_key = os.getenv("VLLM_API_KEY", "sk-no-key-needed")
+
+        if "nemotron" in self.model_name.lower() or "vllm" in self.model_name.lower():
+            print(f"Using local vLLM server at {vllm_base_url}")
+            self.client = OpenAI(api_key=vllm_api_key, base_url=vllm_base_url)
+            self.context_length = 128000  # Nemotron supports 262K but trim for safety
+            self._is_local_vllm = True
+
+        elif self.model_name in config:
             model_config = config[self.model_name]
 
             if model_config["bearer_token"]:
+                if get_bearer_token_provider is None:
+                    raise ImportError("azure-identity is required for bearer token auth. pip install azure-identity")
                 token_provider = get_bearer_token_provider(
                     DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
                 )
@@ -84,7 +102,19 @@ class LLM:
         self.count += 1
         while True:
             try:
-                if "llama" in self.model_name or "mistral" in self.model_name:
+                if getattr(self, '_is_local_vllm', False):
+                    # Local vLLM: auto-detect model, pass max_tokens
+                    return_response = self.client.chat.completions.create(
+                        model=self.model_name,
+                        messages=message,
+                        max_tokens=4096,
+                        temperature=0.1,
+                    ).choices[0].message.content
+                    # Strip thinking tags if present (Nemotron reasoning)
+                    if return_response and '<think>' in return_response:
+                        import re
+                        return_response = re.sub(r'<think>[\s\S]*?</think>', '', return_response).strip()
+                elif "llama" in self.model_name or "mistral" in self.model_name:
                     message = self.merge_messages(message)
                     return_response = self.client.chat.completions.create(model = self.model_name, messages = message, max_tokens=10000).choices[0].message.content
                 else:

@@ -2,3 +2,8 @@ gpt-4o:
   endpoint: "https://{your-deployment}.openai.azure.com/"
   api_version: "2024-02-15-preview"
   bearer_token: true
+
+# Local vLLM server (Nemotron Nano 30B on H100)
+# Usage: --model nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16
+# The LLM class auto-detects "nemotron" in the model name and
+# connects to VLLM_BASE_URL (default: http://localhost:8002/v1)
