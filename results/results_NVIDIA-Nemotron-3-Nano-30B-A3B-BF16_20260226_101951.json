@@ -1,0 +1,138 @@
+{
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+  "agent": "react",
+  "concurrency": 4,
+  "total_elapsed_s": 4349.1,
+  "results": {
+    "PhishingText": {
+      "score": 0.906,
+      "metrics": {
+        "acc": 0.906,
+        "macf1": 0.8995,
+        "macro_precision": 0.8991,
+        "macro_recall": 0.9,
+        "correct": 453,
+        "total": 500,
+        "elapsed_s": 189.73,
+        "avg_latency_ms": 379.0
+      }
+    },
+    "PhishingTextFewShot": {
+      "score": 0.902,
+      "metrics": {
+        "acc": 0.902,
+        "macf1": 0.8927,
+        "macro_precision": 0.904,
+        "macro_recall": 0.8847,
+        "correct": 451,
+        "total": 500,
+        "elapsed_s": 216.57,
+        "avg_latency_ms": 433.0
+      }
+    },
+    "PhishingWeb": {
+      "score": 0.802,
+      "metrics": {
+        "acc": 0.802,
+        "macf1": 0.7434,
+        "macro_precision": 0.862,
+        "macro_recall": 0.7239,
+        "correct": 401,
+        "total": 500,
+        "elapsed_s": 390.57,
+        "avg_latency_ms": 781.0
+      }
+    },
+    "PhishingWebFewShot": {
+      "score": 0.792,
+      "metrics": {
+        "acc": 0.792,
+        "macf1": 0.7374,
+        "macro_precision": 0.8236,
+        "macro_recall": 0.7201,
+        "correct": 396,
+        "total": 500,
+        "elapsed_s": 407.37,
+        "avg_latency_ms": 815.0
+      }
+    },
+    "CyberThreatIntelligenceMultiChoiceQuestions": {
+      "score": 0.664,
+      "metrics": {
+        "acc": 0.664,
+        "macf1": 0.6325,
+        "macro_precision": 0.627,
+        "macro_recall": 0.6456,
+        "correct": 332,
+        "total": 500,
+        "elapsed_s": 560.33,
+        "avg_latency_ms": 1121.0
+      }
+    },
+    "CyberThreatIntelligenceMultiChoiceQuestionsWithContext": {
+      "score": 0.932,
+      "metrics": {
+        "acc": 0.932,
+        "macf1": 0.9221,
+        "macro_precision": 0.9255,
+        "macro_recall": 0.9192,
+        "correct": 466,
+        "total": 500,
+        "elapsed_s": 906.56,
+        "avg_latency_ms": 1813.0
+      }
+    },
+    "CodeVulnerabilityDetection": {
+      "score": 0.556,
+      "metrics": {
+        "acc": 0.556,
+        "macf1": 0.5471,
+        "macro_precision": 0.5524,
+        "macro_recall": 0.5499,
+        "correct": 278,
+        "total": 500,
+        "elapsed_s": 342.29,
+        "avg_latency_ms": 685.0
+      }
+    },
+    "CodeVulnerabilityDetectionFewShot": {
+      "score": 0.548,
+      "metrics": {
+        "acc": 0.548,
+        "macf1": 0.5464,
+        "macro_precision": 0.5464,
+        "macro_recall": 0.5464,
+        "correct": 274,
+        "total": 500,
+        "elapsed_s": 483.5,
+        "avg_latency_ms": 967.0
+      }
+    },
+    "CodeVulnerabilityDevignDetection": {
+      "score": 0.558,
+      "metrics": {
+        "acc": 0.558,
+        "macf1": 0.5553,
+        "macro_precision": 0.5558,
+        "macro_recall": 0.5554,
+        "correct": 279,
+        "total": 500,
+        "elapsed_s": 342.93,
+        "avg_latency_ms": 686.0
+      }
+    },
+    "CodeVulnerabilityDevignDetectionFewShot": {
+      "score": 0.526,
+      "metrics": {
+        "acc": 0.526,
+        "macf1": 0.5244,
+        "macro_precision": 0.5244,
+        "macro_recall": 0.5244,
+        "correct": 263,
+        "total": 500,
+        "elapsed_s": 509.18,
+        "avg_latency_ms": 1018.0
+      }
+    }
+  }
+}

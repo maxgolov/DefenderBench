@@ -362,9 +362,12 @@ def main(args):
     print(f"\n  Total wall time: {total_elapsed:.1f}s")
 
     # ── Save results ─────────────────────────────────────────────
+    results_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))), "results")
+    os.makedirs(results_dir, exist_ok=True)
     model_short = args.model.split('/')[-1]
     ts = time.strftime('%Y%m%d_%H%M%S')
-    results_file = f"results_{model_short}_{ts}.json"
+    results_file = os.path.join(results_dir, f"results_{model_short}_{ts}.json")
     with open(results_file, 'w') as f:
         json.dump({
             "model": args.model,

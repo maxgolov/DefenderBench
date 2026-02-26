@@ -1,0 +1,17 @@
+{
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+  "agent": "react",
+  "concurrency": 4,
+  "total_elapsed_s": 623.28,
+  "results": {
+    "CVEFix": {
+      "score": 0.7410930239773716,
+      "metrics": {
+        "avg_codebleu": 0.7410930239773716,
+        "total_samples": 240,
+        "elapsed_s": 620.28,
+        "avg_latency_ms": 2585.0
+      }
+    }
+  }
+}
