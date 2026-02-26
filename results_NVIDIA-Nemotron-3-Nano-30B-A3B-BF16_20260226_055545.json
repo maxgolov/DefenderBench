@@ -1,0 +1,21 @@
+{
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+  "agent": "react",
+  "concurrency": 4,
+  "total_elapsed_s": 93.91,
+  "results": {
+    "CyberThreatIntelligenceMultiChoiceQuestionsSmall": {
+      "score": 0.74,
+      "metrics": {
+        "acc": 0.74,
+        "macf1": 0.7178,
+        "macro_precision": 0.7066,
+        "macro_recall": 0.7405,
+        "correct": 74,
+        "total": 100,
+        "elapsed_s": 93.9,
+        "avg_latency_ms": 939.0
+      }
+    }
+  }
+}
